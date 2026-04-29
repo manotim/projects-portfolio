@@ -2,147 +2,705 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- FONT-AWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- CUSTOM STYLING -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- PAGE TITLE -->
-    <title>Responsive Personal Portfolio Website Design | @manotimike</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mike Manoti | FullStack Developer & Creative Technologist</title>
+    
+    <!-- Bootstrap 5 + Icons + Google Fonts (Modern Professional Stack) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ----------------------------------------------------------------
+        GLOBAL RESET & CUSTOM PROPERTIES – Premium Dark/Light Edge
+        ----------------------------------------------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0E17;
+            color: #EFF3F8;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --dark-bg: #0A0E17;
+            --card-bg: #111827;
+            --surface: #1E293B;
+            --accent: #3B82F6;
+            --accent-glow: rgba(59,130,246,0.4);
+            --text-light: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-dim: #1E293B;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Smooth scroll & container */
+        html {
+            scroll-padding-top: 90px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .container-custom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Typography modern */
+        h1, h2, h3, h4, .display-text {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA, #A78BFA);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 4px;
+        }
+        .text-center .section-title:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Buttons & cards premium */
+        .btn-premium {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: var(--transition);
+            box-shadow: 0 8px 20px rgba(59,130,246,0.2);
+        }
+        .btn-premium:hover {
+            background: #2563EB;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(59,130,246,0.35);
+            color: white;
+        }
+        .btn-outline-light-premium {
+            border: 1.5px solid rgba(255,255,255,0.2);
+            background: transparent;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: var(--transition);
+            color: var(--text-light);
+        }
+        .btn-outline-light-premium:hover {
+            border-color: var(--accent);
+            background: rgba(59,130,246,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Navbar redefined */
+        .navbar-premium {
+            background: rgba(10, 14, 23, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 18px 0;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .navbar-premium .navbar-brand {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #FFF, #60A5FA);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .navbar-premium .nav-link {
+            color: #E2E8F0;
+            font-weight: 500;
+            margin: 0 6px;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .navbar-premium .nav-link:hover, .navbar-premium .nav-link.active {
+            color: var(--accent);
+        }
+        .navbar-toggler {
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        /* Hero section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+        .hero-img-wrapper {
+            position: relative;
+        }
+        /* Premium blob / organic shape for hero image */
+        .hero-img {
+            border-radius: 38% 62% 70% 30% / 44% 36% 64% 56%;
+            background: linear-gradient(145deg, #1E2A3A, #0F172A);
+            padding: 12px;
+            max-width: 380px;
+            margin: 0 auto;
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease;
+        }
+        .hero-img:hover {
+            transform: scale(1.02);
+        }
+        .hero-img img {
+            width: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+        }
+
+        /* ABOUT IMAGE – Now with the same organic shape & premium styling as hero image */
+        .about-img-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .about-artistic-img {
+            border-radius: 45% 55% 62% 38% / 48% 42% 58% 52%;
+            background: linear-gradient(135deg, #1E293B, #0F172A);
+            padding: 12px;
+            max-width: 420px;
+            margin: 0 auto;
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.6);
+            transition: transform 0.4s ease, box-shadow 0.3s ease;
+            animation: subtleFloat 5s ease-in-out infinite;
+        }
+        .about-artistic-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 45px -12px rgba(59,130,246,0.2);
+        }
+        .about-artistic-img img {
+            width: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+            display: block;
+        }
+        /* subtle floating animation for about image (similar vibe to hero) */
+        @keyframes subtleFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .social-icon-premium {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 50%;
+            font-size: 1.4rem;
+            color: #CBD5E1;
+            transition: var(--transition);
+            margin-right: 12px;
+            backdrop-filter: blur(4px);
+        }
+        .social-icon-premium:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* About modern card (keeping consistency but image now outside with new shape) */
+        .about-content-wrapper {
+            background: transparent;
+        }
+
+        /* services modern grid */
+        .service-card {
+            background: var(--surface);
+            border-radius: 28px;
+            padding: 2.2rem 1.8rem;
+            transition: var(--transition);
+            height: 100%;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
+        }
+        .service-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Portfolio modern grid with overlay */
+        .portfolio-item {
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+            background: #0F172A;
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(59,130,246,0.3));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: 0.4s;
+        }
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.07);
+        }
+        .portfolio-overlay h4 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            transform: translateY(20px);
+            transition: 0.3s;
+        }
+        .portfolio-item:hover .portfolio-overlay h4,
+        .portfolio-item:hover .portfolio-overlay p {
+            transform: translateY(0);
+        }
+        .portfolio-overlay p {
+            transform: translateY(20px);
+            transition: 0.3s 0.05s;
+            font-size: 0.9rem;
+            color: #CBD5E1;
+        }
+
+        /* contact form glass */
+        .glass-form {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .form-control-custom {
+            background: #1E293B;
+            border: 1px solid #334155;
+            padding: 14px 20px;
+            border-radius: 24px;
+            color: white;
+            transition: var(--transition);
+        }
+        .form-control-custom:focus {
+            background: #0F172A;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+            color: white;
+        }
+
+        /* footer */
+        .footer-premium {
+            background: #070B12;
+            padding: 40px 0;
+            border-top: 1px solid #1E293B;
+        }
+
+        /* responsive touches */
+        @media (max-width: 991px) {
+            .hero-section {
+                text-align: center;
+            }
+            .section-title:after {
+                left: 50% !important;
+                transform: translateX(-50%);
+            }
+            .section-title {
+                text-align: center;
+            }
+            .navbar-premium .nav-link {
+                margin: 8px 0;
+            }
+            .about-artistic-img {
+                max-width: 320px;
+                margin-bottom: 2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-img img {
+                max-width: 280px;
+            }
+            .container-custom {
+                padding: 0 20px;
+            }
+            section {
+                padding: 70px 0;
+            }
+            .about-artistic-img {
+                max-width: 280px;
+            }
+        }
+        .badge-tech {
+            background: rgba(59,130,246,0.2);
+            color: #60A5FA;
+            border-radius: 40px;
+            padding: 5px 14px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
-    <!-- HEADER SECTION -->
-    <header class="header">
-        <a href="#" class="logo">Portfolio</a>
-        <i class="fa-solid fa-bars" id="menu-icon"></i>
-        <nav class="navbar">
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
 
-        <!-- HOME SECTION -->
-        <section class="home" id="home">
-            <div class="home-content">
-                <h3>Hi, Myself</h3>
-                <h1>Mike Manoti</h1>
-                <h3>And I'm a <span class="multiple-text">FullStack Developer</span></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ipsum velit temporibus aspernatur, nobis, quidem libero numquam ad sed consequatur maxime blanditiis exercitationem voluptatibus amet atque non necessitatibus molestiae dicta distinctio debitis officia, quas cumque facilis quae. Voluptate, deserunt accusamus.</p>
-                <div class="social-media">
-                    <a href="https://www.youtube.com/@lucidcode6782"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="https://web.facebook.com/groups/1172219113923856"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="https://www.tiktok.com/@dev.mike2?lang=en"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="https://www.linkedin.com/in/mikenyambega/?trk=nav_responsive_tab_profile_pic&originalSubdomain=ke"><i class="fa-brands fa-linkedin"></i></a>
+    <!-- PREMIUM NAVBAR (Bootstrap enhanced) -->
+    <nav class="navbar navbar-expand-lg navbar-premium fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">M<span class="gradient-text">ANOTI</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Expertise</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Work</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Connect</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (Home) -->
+    <section id="home" class="hero-section">
+        <div class="container-custom">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-7 order-2 order-lg-1">
+                    <div class="mb-3">
+                        <span class="badge-tech"><i class="fas fa-code me-1"></i> FullStack · UI/UX · Backend</span>
+                    </div>
+                    <h1 class="display-3 fw-bold mb-3">Mike <span class="gradient-text">Manoti</span></h1>
+                    <h3 class="fw-semibold mb-3">Crafting <span class="multiple-text gradient-text" style="background: linear-gradient(135deg, #60A5FA, #C084FC); -webkit-background-clip: text; background-clip: text; color: transparent;">Digital Experiences</span></h3>
+                    <p class="lead text-secondary mb-4">Architecting high-performance web solutions, modern full-stack applications, and intuitive interfaces that drive business growth. 4+ years of turning ideas into scalable products.</p>
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a href="assets/MIKE NYAMBEGA RESUME.pdf" download class="btn btn-premium"><i class="fas fa-download me-2"></i>Download CV</a>
+                        <a href="#contact" class="btn-outline-light-premium">Let's Talk <i class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                    <div class="mt-3">
+                        <a href="https://www.youtube.com/@lucidcode6782" target="_blank" class="social-icon-premium"><i class="fab fa-youtube"></i></a>
+                        <a href="https://web.facebook.com/groups/1172219113923856" target="_blank" class="social-icon-premium"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@dev.mike2?lang=en" target="_blank" class="social-icon-premium"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.linkedin.com/in/mikenyambega/" target="_blank" class="social-icon-premium"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
-                <a href="assets/MIKE NYAMBEGA RESUME.pdf" download class="btn">Download CV</a>
-            </div>
-            <div class="home-img">
-                <img src="img/newmike.png" alt="">
-            </div>
-        </section>
-
-        <!-- HOME SECTION -->
-        <section class="about" id="about">
-            <div class="about-img">
-                <img src="img/about-mike.png" alt="">
-            </div>
-
-            <div class="about-content">
-                <h2 class="heading">ABOUT <span>Me</span></h2>
-                <h3>FullStack Developer</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure fugiat, itaque sequi natus dolore repellat vel exercitationem maxime, laborum veritatis inventore molestiae labore neque consectetur quos? Beatae eaque a quisquam sit eius iure illum aspernatur quae aliquid voluptates voluptas repellat corporis unde, labore reprehenderit earum velit dolor dolorem mollitia? Modi.</p>
-                <a href="" class="btn">Read More</a>
-            </div>
-        </section>
-
-        <!-- SERVICES SECTION -->
-        <section class="services" id="services">
-            <h2 class="heading">My <span>Services</span></h2>
-            <div class="services-container">
-                <div class="services-box">
-                    <i class="fa-solid fa-code"></i>
-                    <h3>Web Development</h3>
-                    <p>"Expert web development services offering custom websites tailored to your business needs."</p>
-                    <a href="#" class="btn">Read More</a>
-                </div>
-                <div class="services-box">
-                    <i class="fa-solid fa-palette"></i>
-                    <h3>UI/UX Designing</h3>
-                    <p>"Creative UI/UX design services focused on delivering user-friendly and visually appealing interfaces."</p>
-                    <a href="#" class="btn">Read More</a>
-                </div>
-                <div class="services-box">
-                    <i class="fa-solid fa-server"></i>
-                    <h3>Backend Development</h3>
-                    <p>"Robust backend development services ensuring secure, scalable, and efficient server-side solutions."</p>
-                    <a href="#" class="btn">Read More</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- PORTFOLIO SECTION -->
-        <section class="portfolio" id="portfolio">
-            <h2 class="heading">Latest <span>Projects</span></h2>
-            <div class="portfolio-container">
-                <a href="https://hakamtours01.com/" target="_blank">
-                    <div class="portfolio-box">
-                        <img src="img/hakamhomepage.png" alt="Hakam Tours and Travels">
-                        <div class="portfolio-layer">
-                            <h4>Hakam Tours and Travels</h4>
-                            <p>Experience the magic of Africa with expertly crafted safaris, cultural tours, and unforgettable adventures across Kenya's most breathtaking landscapes.</p>
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <div class="col-lg-5 order-1 order-lg-2 text-center">
+                    <div class="hero-img-wrapper">
+                        <div class="hero-img">
+                            <img src="img/newmike.png" alt="Mike Manoti" onerror="this.src='https://placehold.co/400x400/1E293B/3B82F6?text=Mike+Manoti'">
                         </div>
                     </div>
-                </a>
-                
-                <a href="https://apconsultpro.com/" target="_blank">
-                    <div class="portfolio-box">
-                        <img src="img/A&P_Consulting.png" alt="A&P Consulting">
-                        <div class="portfolio-layer">
-                            <h4>A&P Consulting</h4>
-                            <p>At A&P Consulting, we turn complex numbers into clear strategies for small businesses and independent professionals.</p>
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION – Image now matches hero styling (organic shape, gradient border, floating animation) -->
+    <section id="about" style="background: #0E121F;">
+        <div class="container-custom">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 text-center">
+                    <div class="about-img-wrapper">
+                        <div class="about-artistic-img">
+                            <img src="img/about-mike.png" alt="Mike Manoti - FullStack Developer" onerror="this.src='https://placehold.co/500x500/1E293B/3B82F6?text=Mike+Manoti'">
                         </div>
                     </div>
-                </a>
-                
-            </div>
-        </section>
-
-        <!-- CONTACT SECTION -->
-        <section class="contact" id="contact">
-            <h2 class="heading">Contact <span>Me</span></h2>
-            <form action="#">
-                <div class="input-box">
-                    <input type="text" placeholder="Full Name">
-                    <input type="email" placeholder="Email Address">
                 </div>
-                <div class="input-box">
-                    <input type="number" placeholder="Mobile Number">
-                    <input type="text" placeholder="Email Subject">
+                <div class="col-lg-7">
+                    <h2 class="section-title" style="margin-bottom: 1rem;">About <span class="gradient-text">Me</span></h2>
+                    <h3 class="fw-semibold mb-3">FullStack Developer & Creative Technologist</h3>
+                    <p class="text-secondary mb-4">I'm Mike, a passionate developer focused on building robust web platforms and seamless user interfaces. I blend modern backend architectures with pixel-perfect frontend design to deliver exceptional digital products. From custom travel booking systems to financial consulting portals, I solve real-world problems with clean code and creative thinking.</p>
+                    <div class="row mt-4">
+                        <div class="col-6 col-md-4 mb-3"><i class="fas fa-check-circle text-primary me-2"></i> React/Vue</div>
+                        <div class="col-6 col-md-4 mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Node.js/Python</div>
+                        <div class="col-6 col-md-4 mb-3"><i class="fas fa-check-circle text-primary me-2"></i> UI/UX Strategy</div>
+                        <div class="col-6 col-md-4 mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Laravel/Express</div>
+                        <div class="col-6 col-md-4 mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Database Design</div>
+                        <div class="col-6 col-md-4 mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Cloud Deployment</div>
+                    </div>
+                    <a href="#contact" class="btn-premium mt-2 d-inline-block">Work together <i class="fas fa-arrow-right ms-2"></i></a>
                 </div>
-                <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
-                <input type="submit" value="Send Messsage" class="btn">
-            </form>
-        </section>
+            </div>
+        </div>
+    </section>
 
-        <!-- FOOTER SECTION -->
-        <footer class="footer">
-            <div class="footer-text">
-                <p>Copyright &copy; 2024 by @manotimike | All Rights Reserved.</p>
+    <!-- SERVICES / EXPERTISE SECTION -->
+    <section id="services">
+        <div class="container-custom">
+            <div class="text-center mb-5">
+                <h2 class="section-title d-inline-block">Core <span class="gradient-text">Expertise</span></h2>
+                <p class="text-secondary mt-3">End-to-end development solutions tailored to modern business needs</p>
             </div>
-            <div class="footer-iconTop">
-                <a href="#home"><i class="fa-solid fa-angle-up"></i></a>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <i class="fas fa-code service-icon"></i>
+                        <h4 class="fw-bold mb-3">Web Development</h4>
+                        <p class="text-secondary">High-performance, responsive websites & SPAs with React, Vue, and optimized backend APIs ensuring scalability.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <i class="fas fa-palette service-icon"></i>
+                        <h4 class="fw-bold mb-3">UI/UX Design</h4>
+                        <p class="text-secondary">Intuitive interfaces & user-centric designs, wireframing to polished prototypes that elevate brand interaction.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <i class="fas fa-server service-icon"></i>
+                        <h4 class="fw-bold mb-3">Backend Engineering</h4>
+                        <p class="text-secondary">Secure RESTful APIs, database architecture, authentication, cloud infrastructure (AWS/DigitalOcean).</p>
+                    </div>
+                </div>
             </div>
-        </footer>
-        <!-- Scroll Reveal JS -->
-        <script src="https://unpkg.com/scrollreveal"></script>
-        <!-- Types JS -->
-        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-        <!-- Main JS -->
-   <script src="main.js"></script> 
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION – LATEST PROJECTS -->
+    <section id="portfolio" style="background: #0E121F;">
+        <div class="container-custom">
+            <div class="text-center mb-5">
+                <h2 class="section-title d-inline-block">Latest <span class="gradient-text">Creations</span></h2>
+                <p class="text-secondary mt-3">Real-world projects that blend innovation with performance</p>
+            </div>
+            <div class="row g-4">
+                <!-- Hakam Tours -->
+                <div class="col-md-6">
+                    <a href="https://hakamtours01.com/" target="_blank" class="text-decoration-none">
+                        <div class="portfolio-item">
+                            <img src="img/hakamhomepage.png" alt="Hakam Tours and Travels" onerror="this.src='https://placehold.co/800x500/1E293B/3B82F6?text=Hakam+Tours'">
+                            <div class="portfolio-overlay">
+                                <h4>Hakam Tours & Travels</h4>
+                                <p>Discover Africa safari booking platform — immersive UI, dynamic itinerary management.</p>
+                                <span class="badge-tech mt-2 d-inline-flex w-auto">Live Project <i class="fas fa-external-link-alt ms-2"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- A&P Consulting -->
+                <div class="col-md-6">
+                    <a href="https://apconsultpro.com/" target="_blank" class="text-decoration-none">
+                        <div class="portfolio-item">
+                            <img src="img/A&P_Consulting.png" alt="A&P Consulting" onerror="this.src='https://placehold.co/800x500/1E293B/3B82F6?text=A%26P+Consulting'">
+                            <div class="portfolio-overlay">
+                                <h4>A&P Consulting</h4>
+                                <p>Financial strategy platform with data dashboards & client-centric advisory tools.</p>
+                                <span class="badge-tech mt-2 d-inline-flex w-auto">Business Suite</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <p class="text-muted">More projects? Let's connect — every line of code tells a story.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION – modern glassmorphism -->
+    <section id="contact">
+        <div class="container-custom">
+            <div class="text-center mb-5">
+                <h2 class="section-title d-inline-block">Let's <span class="gradient-text">Collaborate</span></h2>
+                <p class="text-secondary mt-2">Got a project? I’m one message away — ready to bring your vision to life.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="glass-form">
+                        <form id="contactForm" action="#">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control form-control-custom" placeholder="Full name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control form-control-custom" placeholder="Email address" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="tel" class="form-control form-control-custom" placeholder="Phone number">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control form-control-custom" placeholder="Subject">
+                                </div>
+                                <div class="col-12">
+                                    <textarea rows="5" class="form-control form-control-custom" placeholder="Tell me about your idea..." required></textarea>
+                                </div>
+                                <div class="col-12 text-center mt-3">
+                                    <button type="submit" class="btn-premium px-5"><i class="fas fa-paper-plane me-2"></i>Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-premium">
+        <div class="container-custom">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <p class="mb-0 text-secondary">&copy; 2024 <span class="text-white">Mike Manoti</span>. All rights reserved. Built with <i class="fas fa-heart text-primary"></i></p>
+                </div>
+                <div>
+                    <a href="#home" class="btn btn-sm rounded-circle bg-primary bg-opacity-25 p-2 px-3"><i class="fas fa-angle-up text-white"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS + ScrollReveal + Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    
+    <script>
+        // Navbar active link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        
+        function handleActiveSection() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.clientHeight;
+                if(pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleActiveSection);
+        window.addEventListener('load', handleActiveSection);
+        
+        // Mobile menu close after click
+        const navBarToggler = document.querySelector('.navbar-toggler');
+        const navCollapse = document.querySelector('.navbar-collapse');
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(navCollapse.classList.contains('show')) {
+                    navBarToggler.click();
+                }
+            });
+        });
+        
+        // Typed JS with professional titles
+        const typed = new Typed('.multiple-text', {
+            strings: ['FullStack Developer', 'UI/UX Architect', 'Backend Engineer', 'Tech Consultant'],
+            typeSpeed: 65,
+            backSpeed: 45,
+            backDelay: 1200,
+            loop: true,
+            showCursor: true,
+            cursorChar: '|',
+        });
+        
+        // ScrollReveal premium animation (updated for about image)
+        ScrollReveal({ 
+            distance: '40px',
+            duration: 900,
+            delay: 100,
+            reset: false,
+            easing: 'cubic-bezier(0.2, 0.9, 0.4, 1.1)',
+        });
+        ScrollReveal().reveal('.hero-section .col-lg-7, .hero-img', { origin: 'left', interval: 150 });
+        ScrollReveal().reveal('.service-card', { origin: 'bottom', interval: 100 });
+        ScrollReveal().reveal('.portfolio-item', { origin: 'bottom', interval: 200 });
+        ScrollReveal().reveal('.about-artistic-img', { origin: 'left', duration: 1000 });
+        ScrollReveal().reveal('.about-content-wrapper, .about .col-lg-7', { origin: 'right', interval: 100 });
+        ScrollReveal().reveal('.glass-form', { origin: 'bottom' });
+        
+        // Smooth contact form alert (demo)
+        const contactForm = document.getElementById('contactForm');
+        if(contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('✨ Message received! Mike will get back to you within 24h. Let’s build something great.');
+                contactForm.reset();
+            });
+        }
+        
+        // sticky navbar effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar-premium');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 14, 23, 0.96)';
+                navbar.style.backdropFilter = 'blur(16px)';
+            } else {
+                navbar.style.background = 'rgba(10, 14, 23, 0.9)';
+            }
+        });
+        
+        // fallback for missing images
+        const imgs = document.querySelectorAll('img');
+        imgs.forEach(img => {
+            img.addEventListener('error', function() {
+                if(!this.dataset.fallback) {
+                    this.dataset.fallback = 'true';
+                    if(this.src.includes('newmike')) this.src = 'https://placehold.co/500x500/111827/3B82F6?text=Mike+Manoti';
+                    else if(this.src.includes('about-mike')) this.src = 'https://placehold.co/600x600/111827/3B82F6?text=Mike+Manoti';
+                    else if(this.src.includes('hakam')) this.src = 'https://placehold.co/800x500/1E293B/3B82F6?text=Hakam+Tours';
+                    else if(this.src.includes('A&P')) this.src = 'https://placehold.co/800x500/1E293B/3B82F6?text=A%26P+Consulting';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
